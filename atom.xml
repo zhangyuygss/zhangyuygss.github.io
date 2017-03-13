@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Notes</title>
+  <title>Zhang Yu&#39;s notes</title>
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2017-03-13T07:52:56.824Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="https://zhangyuygss.github.io/"/>
+  <updated>2017-03-13T09:19:46.993Z</updated>
+  <id>https://zhangyuygss.github.io/</id>
   
   <author>
     <name>Yu Zhang</name>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://yoursite.com/2017/03/13/Cross-entropy/"/>
-    <id>http://yoursite.com/2017/03/13/Cross-entropy/</id>
-    <published>2017-03-13T07:52:56.824Z</published>
-    <updated>2017-03-13T07:52:56.824Z</updated>
+    <title>Cross-entropy and Softmax relation</title>
+    <link href="https://zhangyuygss.github.io/2017/03/12/Cross-entropy-%E4%B8%8E-Softmax/"/>
+    <id>https://zhangyuygss.github.io/2017/03/12/Cross-entropy-与-Softmax/</id>
+    <published>2017-03-12T08:56:56.000Z</published>
+    <updated>2017-03-13T09:19:46.993Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Cross-entropy-交叉熵"><a href="#Cross-entropy-交叉熵" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h1><p>信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.</p>
 <h3 id="Entropy-熵"><a href="#Entropy-熵" class="headerlink" title="Entropy(熵)"></a>Entropy(熵)</h3><p>首先介绍熵的概念. 类似于物理学里用来描述系统混乱程度, 这里的熵用来表示某服从分布 $p$ 的随机变量 $X$ 的不确定程度. 符号表示位 $H(p)$ 或者 $H(X)$. 具体计算公式为:<br>$$<br>H(p) = E(-plog(p))<br>$$</p>
@@ -40,8 +40,7 @@
 <ul>
 <li><p>单纯从概率的角度看, 最小化 <em>loss</em> 的过程就是在最大化$\frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}$, 这符合我们的想象. 模型赋予正确分类上的概率越大, 我们自然认为这个模型的估计很合理.</p>
 </li>
-<li><p>我们也可以从熵的角度来看这个 <em>loss</em> . 很明显, 真实分布 $p$ 和估计分布 $q$ 之间的交叉熵为<br>$$<br>\begin{aligned}<br>H(p,q) &amp;= - \sum_{k = 1}^K p(x = k)log(q(x = k))\\<br>&amp;=-p(x = j)log(q(x=k))\\<br>&amp;= -log \frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}\\<br>&amp;= L<br>\end{aligned}<br>$$<br>​</p>
-<p>于是, 当我们最小化 $L$ 时, 我们也相当于在最小化 $p$, $q$ 之间的交叉熵. 而该交叉熵的下界应该是 $H(p)$. 这样我们也可以认为在最小化 $KL(p~||~q) = H(p,q) - H(p)$, 即 $p$ 和 $q$ 之间的 <em>KL divergence</em>. 把它优化得越小, $p$ 和 $q$ 就越接近, 就认为我们估计得越好.</p>
+<li><p>我们也可以从熵的角度来看这个 <em>loss</em> . 很明显, 真实分布 $p$ 和估计分布 $q$ 之间的交叉熵为<br>$$<br>\begin{aligned}<br>H(p,q) &amp;= - \sum_{k = 1}^K p(x = k)log(q(x = k))\\<br>&amp;=-p(x = j)log(q(x=k))\\<br>&amp;= -log \frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}\\<br>&amp;= L<br>\end{aligned}<br>$$<br>于是, 当我们最小化 $L$ 时, 我们也相当于在最小化 $p$, $q$ 之间的交叉熵. 而该交叉熵的下界应该是 $H(p)$. 这样我们也可以认为在最小化 $KL(p~||~q) = H(p,q) - H(p)$, 即 $p$ 和 $q$ 之间的 <em>KL divergence</em>. 把它优化得越小, $p$ 和 $q$ 就越接近, 就认为我们估计得越好.</p>
 <p>​</p>
 </li>
 </ul>
