@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.
+Entropy(熵)首先介绍熵的概念. 类似于物理学里用来描述系统混乱程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes">
+<meta property="og:url" content="http://yoursite.com/2017/03/13/Cross-entropy/index.html">
+<meta property="og:site_name" content="Notes">
+<meta property="og:description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.
+Entropy(熵)首先介绍熵的概念. 类似于物理学里用来描述系统混乱程">
+<meta property="og:updated_time" content="2017-03-12T16:29:50.333Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Notes">
+<meta name="twitter:description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.
+Entropy(熵)首先介绍熵的概念. 类似于物理学里用来描述系统混乱程">
+  
+    <link rel="alternate" href="/atom.xml" title="Notes" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Notes</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Cross-entropy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/13/Cross-entropy/" class="article-date">
+  <time datetime="2017-03-13T07:12:21.717Z" itemprop="datePublished">2017-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Cross-entropy-交叉熵"><a href="#Cross-entropy-交叉熵" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h1><p>信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.</p>
+<h3 id="Entropy-熵"><a href="#Entropy-熵" class="headerlink" title="Entropy(熵)"></a>Entropy(熵)</h3><p>首先介绍熵的概念. 类似于物理学里用来描述系统混乱程度, 这里的熵用来表示某服从分布 $p$ 的随机变量 $X$ 的不确定程度. 符号表示位 $H(p)$ 或者 $H(X)$. 具体计算公式为:<br>$$<br>H(p) = E(-plog(p))<br>$$</p>
+<p>具体如何计算这里的熵:</p>
+<ul>
+<li>对于离散分布 $p$ : $H(p) = -\sum_{k = 1}^K p(X = k)log(p(X = k))$. 比如伯努利分布的 entropy 为 $H(p) = -(p(X = 0)log(p(X = 0)) + p(X = 1)log(p(X = 1))) \approx 0.69$. (此处 $log$ 取自然底数 $e$)</li>
+<li>对于连续分布 $p$ 取相应的积分即可: $H(p) = -\int p(X)log(p(X)) dx$.        </li>
+</ul>
+<p>从计算公式中可以看出当 $X$ 服从均匀分布时, $H(p)$ 的值会取到最大, 也就是分布最不确定; 当分布 $p$ 在某点处概率为脉冲时, 不确定性最小, $H(p)$ 也最小. </p>
+<p>像一开始介绍的那样, 熵可以理解为在分布 $p$ 下表达 $X$ 所需的期望编码长度. </p>
+<h3 id="Cross-entropy-交叉熵-1"><a href="#Cross-entropy-交叉熵-1" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h3><p>有了熵的概念, 下面介绍交叉熵 <em>cross-entropy</em> . 假如对于 $X$ ,我们有了真实的概率分布 $p$, 就能计算表达 $X$ 需要的编码长度. 这种编码是按照 $X$ 的准确分布量身定制的, 因此是描述 $X$ 的最小编码长度. 而如果我们没有按照分布 $p$ 来表示 $X$, 而采用了另一个估计的概率分布 $q$ 来描述 $X$, 直观上来说, 我们会认为此时需要更多的编码来描述 $X$. 事实上也确实如此. 我们定义交叉熵 $H(p,q)$ 来表示使用错误的分布 $q$ 来表达 $X$ 时需要的平均编码长度:<br>$$<br>H(p,q) = E(-plog(q))<br>$$<br>在离散分布时为: $H(p,q) = - \sum_{k = 1}^K p(X = k)log(q(X = k))$.</p>
+<p>做差引入一个重要的概念 <em>KL divergence</em>:<br>$$<br>\begin{aligned}<br>KL(p~||~q) &amp;= H(p,q) - H(p)\<br>&amp;=  \sum_{k = 1}^K p(X=k)log \frac{p(X = k)}{q(X = k)} \<br>&amp;\ge 0<br>\end{aligned}<br>$$<br>使用 <em>Jensen 不等式</em> 可以证明(后面给出) <em>KL divergence</em> 一定大于等于0, 也就是使用错误的编码表达 $X$ 时需要耗费更多的编码数. 当且仅当 $p = q$ 时等号成立.</p>
+<p>除了表达多用的编码长度外, <em>KL divergence</em> 还有某种意义上的 ‘距离’ 含义, 它表示了两个分布 $p$ 和 $q$ 之间的差别. 相比于表示两个分布之间线性相关性的 <em>相关</em> , KL 距离能够表达 $p$ 和 $q$之间的更多比较信息. </p>
+<h3 id="Softmax-Classifier"><a href="#Softmax-Classifier" class="headerlink" title="Softmax Classifier"></a>Softmax Classifier</h3><p>机器学习中的分类器 <em>softmax</em> 使用了 <em>cross-entropy</em>. 该 <em>loss</em> 被广泛应用于神经网络中.</p>
+<p>对于 $k$ 个类别的分类问题, 使用线性响应函数 $f(x)_r = w_r^Tx (r = 1,2\cdots k)$ 把样本 $x$ 映射成第 $r$ 个分类上的’’得分’’. 于是若某个样本 $x$属于类别 $j$ , 则得到该样本上的 <em>loss function</em> :<br>$$<br>L = -log\frac{e^{f<em>j}}{\sum</em>{i = 1}^k e^{f_i}}<br>$$<br>该损失函数包含  <em>softmax function</em> 的形式,但这个 <em>loss</em> 却经常被称为 <em>cross-entropy loss</em> . 如何理解这样的叫法呢? </p>
+<p>首先, 对于样本 $x$ , 它只能属于某一个类别, 也就是它服从真实分布 $p = [0, 0, \cdots , 1(属于第j个类别的概率), \cdots ,0]$. 比值项 $\frac{e^{f<em>j}}{\sum</em>{i = 1}^k e^{f_i}}$ 可以看做(注意只是看做, 因为这里计算出的概率数值上并没有很确切的意义, 把它们进行排序得到的 order 相对意义更明确: 属于各个类别的可能性大小的排序)我们模型估计的样本 $x$(属于类别j) 属于 $j$ 的概率, 这个值在真实分布 $p$ 中应该是1, 但是我们的估计值一般是小于1的. 类似我们写出估计出的分布 $q = [\frac{e^{f<em>1}}{\sum</em>{i = 1}^k e^{f_i}}, \frac{e^{f<em>2}}{\sum</em>{i = 1}^k e^{f_i}}, \cdots ,\frac{e^{f<em>j}}{\sum</em>{i = 1}^k e^{f_i}}, \cdots ,\frac{e^{f<em>k}}{\sum</em>{i = 1}^k e^{f_i}}]$. </p>
+<ul>
+<li><p>单纯从概率的角度看, 最小化 <em>loss</em> 的过程就是在最大化$\frac{e^{f<em>j}}{\sum</em>{i = 1}^k e^{f_i}}$, 这符合我们的想象. 模型赋予正确分类上的概率越大, 我们自然认为这个模型的估计很合理.</p>
+</li>
+<li><p>我们也可以从熵的角度来看这个 <em>loss</em> . 很明显, 真实分布 $p$ 和估计分布 $q$ 之间的交叉熵为<br>$$<br>\begin{aligned}<br>H(p,q) &amp;= - \sum_{k = 1}^K p(x = k)log(q(x = k))    \</p>
+<pre><code>&amp;=-p(x = j)log(q(x=k))    \\
+&amp;= -log \frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}    \\
+&amp;= L
+</code></pre><p>\end{aligned}<br>$$<br>于是, 当我们最小化 $L$ 时, 我们也相当于在最小化 $p$, $q$ 之间的交叉熵. 而该交叉熵的下界应该是 $H(p)$. 这样我们也可以认为在最小化 $KL(p~||~q) = H(p,q) - H(p)$, 即 $p$ 和 $q$ 之间的 <em>KL divergence</em>. 把它优化得越小, $p$ 和 $q$ 就越接近, 就认为我们估计得越好.</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/13/Cross-entropy/" data-id="cj07rucm80001px8cuao6dwac" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/13/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/13/Cross-entropy/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/13/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Yu Zhang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
