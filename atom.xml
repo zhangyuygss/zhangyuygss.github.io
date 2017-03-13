@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-13T07:39:53.347Z</updated>
+  <updated>2017-03-13T07:52:56.824Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <title></title>
     <link href="http://yoursite.com/2017/03/13/Cross-entropy/"/>
     <id>http://yoursite.com/2017/03/13/Cross-entropy/</id>
-    <published>2017-03-13T07:39:53.347Z</published>
-    <updated>2017-03-13T07:39:53.347Z</updated>
+    <published>2017-03-13T07:52:56.824Z</published>
+    <updated>2017-03-13T07:52:56.824Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Cross-entropy-交叉熵"><a href="#Cross-entropy-交叉熵" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h1><p>信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.</p>
 <h3 id="Entropy-熵"><a href="#Entropy-熵" class="headerlink" title="Entropy(熵)"></a>Entropy(熵)</h3><p>首先介绍熵的概念. 类似于物理学里用来描述系统混乱程度, 这里的熵用来表示某服从分布 $p$ 的随机变量 $X$ 的不确定程度. 符号表示位 $H(p)$ 或者 $H(X)$. 具体计算公式为:<br>$$<br>H(p) = E(-plog(p))<br>$$</p>
@@ -32,7 +32,7 @@
 <p>从计算公式中可以看出当 $X$ 服从均匀分布时, $H(p)$ 的值会取到最大, 也就是分布最不确定; 当分布 $p$ 在某点处概率为脉冲时, 不确定性最小, $H(p)$ 也最小. </p>
 <p>像一开始介绍的那样, 熵可以理解为在分布 $p$ 下表达 $X$ 所需的期望编码长度. </p>
 <h3 id="Cross-entropy-交叉熵-1"><a href="#Cross-entropy-交叉熵-1" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h3><p>有了熵的概念, 下面介绍交叉熵 <em>cross-entropy</em> . 假如对于 $X$ ,我们有了真实的概率分布 $p$, 就能计算表达 $X$ 需要的编码长度. 这种编码是按照 $X$ 的准确分布量身定制的, 因此是描述 $X$ 的最小编码长度. 而如果我们没有按照分布 $p$ 来表示 $X$, 而采用了另一个估计的概率分布 $q$ 来描述 $X$, 直观上来说, 我们会认为此时需要更多的编码来描述 $X$. 事实上也确实如此. 我们定义交叉熵 $H(p,q)$ 来表示使用错误的分布 $q$ 来表达 $X$ 时需要的平均编码长度:<br>$$<br>H(p,q) = E(-plog(q))<br>$$<br>在离散分布时为: $H(p,q) = - \sum_{k = 1}^K p(X = k)log(q(X = k))$.</p>
-<p>做差引入一个重要的概念 <em>KL divergence</em>:<br>$$<br>\begin{aligned}<br>KL(p~||~q) &amp;= H(p,q) - H(p)\ <br>&amp;=  \sum_{k = 1}^K p(X=k)log \frac{p(X = k)}{q(X = k)} \\<br>&amp;\ge 0<br>\end{aligned}<br>$$<br>使用 <em>Jensen 不等式</em> 可以证明(后面给出) <em>KL divergence</em> 一定大于等于0, 也就是使用错误的编码表达 $X$ 时需要耗费更多的编码数. 当且仅当 $p = q$ 时等号成立.</p>
+<p>做差引入一个重要的概念 <em>KL divergence</em>:<br>$$<br>\begin{aligned}<br>KL(p||q) &amp;= H(p,q) - H(p)\\<br>&amp;= \sum_{k = 1}^K p(X=k)log \frac{p(X = k)}{q(X = k)}\\<br>&amp;\ge 0<br>\end{aligned}<br>$$<br>使用 <em>Jensen 不等式</em> 可以证明(后面给出) <em>KL divergence</em> 一定大于等于0, 也就是使用错误的编码表达 $X$ 时需要耗费更多的编码数. 当且仅当 $p = q$ 时等号成立.</p>
 <p>除了表达多用的编码长度外, <em>KL divergence</em> 还有某种意义上的 ‘距离’ 含义, 它表示了两个分布 $p$ 和 $q$ 之间的差别. 相比于表示两个分布之间线性相关性的 <em>相关</em> , KL 距离能够表达 $p$ 和 $q$之间的更多比较信息. </p>
 <h3 id="Softmax-Classifier"><a href="#Softmax-Classifier" class="headerlink" title="Softmax Classifier"></a>Softmax Classifier</h3><p>机器学习中的分类器 <em>softmax</em> 使用了 <em>cross-entropy</em>. 该 <em>loss</em> 被广泛应用于神经网络中.</p>
 <p>对于 $k$ 个类别的分类问题, 使用线性响应函数 $f(x)_r = w_r^Tx (r = 1,2\cdots k)$ 把样本 $x$ 映射成第 $r$ 个分类上的’’得分’’. 于是若某个样本 $x$属于类别 $j$ , 则得到该样本上的 <em>loss function</em> :<br>$$<br>L = -log\frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}<br>$$<br>该损失函数包含  <em>softmax function</em> 的形式,但这个 <em>loss</em> 却经常被称为 <em>cross-entropy loss</em> . 如何理解这样的叫法呢? </p>
