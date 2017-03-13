@@ -78,6 +78,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="Zhang Yu's notes" type="application/atom+xml" />
 
@@ -91,16 +93,16 @@
 
 
 
-<meta name="description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Cross-entropy and Softmax relation">
-<meta property="og:url" content="https://zhangyuygss.github.io/2017/03/12/Cross-entropy-与-Softmax/index.html">
+<meta name="description" content="Contact me:zhangyuygss at gmail dot com">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Zhang Yu's notes">
+<meta property="og:url" content="https://zhangyuygss.github.io/about.html">
 <meta property="og:site_name" content="Zhang Yu's notes">
-<meta property="og:description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.">
-<meta property="og:updated_time" content="2017-03-13T11:21:49.987Z">
+<meta property="og:description" content="Contact me:zhangyuygss at gmail dot com">
+<meta property="og:updated_time" content="2017-03-13T12:24:42.060Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cross-entropy and Softmax relation">
-<meta name="twitter:description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.">
+<meta name="twitter:title" content="Zhang Yu's notes">
+<meta name="twitter:description" content="Contact me:zhangyuygss at gmail dot com">
 
 
 
@@ -128,13 +130,19 @@
 
 
 
-  <link rel="canonical" href="https://zhangyuygss.github.io/2017/03/12/Cross-entropy-与-Softmax/"/>
+  <link rel="canonical" href="https://zhangyuygss.github.io/about.html"/>
 
 
 
 
 
-  <title> Cross-entropy and Softmax relation | Zhang Yu's notes </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>
+  
+
+  
+     | Zhang Yu's notes
+  
+</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -169,7 +177,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -254,168 +262,19 @@
             
 
   <div id="posts" class="posts-expand">
-    
+  <header class="post-header">
 
-  
+	<h1 class="post-title" itemprop="name headline"></h1>
 
-  
-  
-  
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://zhangyuygss.github.io/2017/03/12/Cross-entropy-与-Softmax/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yu Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/938.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhang Yu's notes">
-    </span>
+</header>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Cross-entropy and Softmax relation
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-12T16:56:56+08:00">
-                2017-03-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/12/Cross-entropy-与-Softmax/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/12/Cross-entropy-与-Softmax/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/03/12/Cross-entropy-与-Softmax/" class="leancloud_visitors" data-flag-title="Cross-entropy and Softmax relation">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
+      <h2 id="Contact-me"><a href="#Contact-me" class="headerlink" title="Contact me:"></a>Contact me:</h2><p>zhangyuygss at gmail dot com</p>
 
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h1 id="Cross-entropy-交叉熵"><a href="#Cross-entropy-交叉熵" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h1><p>信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.<br><a id="more"></a></p>
-<h3 id="Entropy-熵"><a href="#Entropy-熵" class="headerlink" title="Entropy(熵)"></a>Entropy(熵)</h3><p>首先介绍熵的概念. 类似于物理学里用来描述系统混乱程度, 这里的熵用来表示某服从分布 $p$ 的随机变量 $X$ 的不确定程度. 符号表示位 $H(p)$ 或者 $H(X)$. 具体计算公式为:<br>$$<br>H(p) = E(-plog(p))<br>$$</p>
-<p>具体如何计算这里的熵:</p>
-<ul>
-<li>对于离散分布 $p$ : $H(p) = -\sum_{k = 1}^K p(X = k)log(p(X = k))$. 比如伯努利分布的 entropy 为 $H(p) = -(p(X = 0)log(p(X = 0)) + p(X = 1)log(p(X = 1))) \approx 0.69$. (此处 $log$ 取自然底数 $e$)</li>
-<li>对于连续分布 $p$ 取相应的积分即可: $H(p) = -\int p(X)log(p(X)) dx$.        </li>
-</ul>
-<p>从计算公式中可以看出当 $X$ 服从均匀分布时, $H(p)$ 的值会取到最大, 也就是分布最不确定; 当分布 $p$ 在某点处概率为脉冲时, 不确定性最小, $H(p)$ 也最小. </p>
-<p>像一开始介绍的那样, 熵可以理解为在分布 $p$ 下表达 $X$ 所需的期望编码长度. </p>
-<h3 id="Cross-entropy-交叉熵-1"><a href="#Cross-entropy-交叉熵-1" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h3><p>有了熵的概念, 下面介绍交叉熵 <em>cross-entropy</em> . 假如对于 $X$ ,我们有了真实的概率分布 $p$, 就能计算表达 $X$ 需要的编码长度. 这种编码是按照 $X$ 的准确分布量身定制的, 因此是描述 $X$ 的最小编码长度. 而如果我们没有按照分布 $p$ 来表示 $X$, 而采用了另一个估计的概率分布 $q$ 来描述 $X$, 直观上来说, 我们会认为此时需要更多的编码来描述 $X$. 事实上也确实如此. 我们定义交叉熵 $H(p,q)$ 来表示使用错误的分布 $q$ 来表达 $X$ 时需要的平均编码长度:<br>$$<br>H(p,q) = E(-plog(q))<br>$$<br>在离散分布时为: $H(p,q) = - \sum_{k = 1}^K p(X = k)log(q(X = k))$.</p>
-<p>做差引入一个重要的概念 <em>KL divergence</em>:<br>$$<br>\begin{aligned}<br>KL(p||q) &amp;= H(p,q) - H(p)\\<br>&amp;= \sum_{k = 1}^K p(X=k)log \frac{p(X = k)}{q(X = k)}\\<br>&amp;\ge 0<br>\end{aligned}<br>$$<br>使用 <em>Jensen 不等式</em> 可以证明(后面给出) <em>KL divergence</em> 一定大于等于0, 也就是使用错误的编码表达 $X$ 时需要耗费更多的编码数. 当且仅当 $p = q$ 时等号成立.</p>
-<p>除了表达多用的编码长度外, <em>KL divergence</em> 还有某种意义上的 ‘距离’ 含义, 它表示了两个分布 $p$ 和 $q$ 之间的差别. 相比于表示两个分布之间线性相关性的 <em>相关</em> , KL 距离能够表达 $p$ 和 $q$之间的更多比较信息. </p>
-<h3 id="Softmax-Classifier"><a href="#Softmax-Classifier" class="headerlink" title="Softmax Classifier"></a>Softmax Classifier</h3><p>机器学习中的分类器 <em>softmax</em> 使用了 <em>cross-entropy</em>. 该 <em>loss</em> 被广泛应用于神经网络中.</p>
-<p>对于 $k$ 个类别的分类问题, 使用线性响应函数 $f(x)_r = w_r^Tx (r = 1,2\cdots k)$ 把样本 $x$ 映射成第 $r$ 个分类上的’’得分’’. 于是若某个样本 $x$属于类别 $j$ , 则得到该样本上的 <em>loss function</em> :<br>$$<br>L = -log\frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}<br>$$<br>该损失函数包含  <em>softmax function</em> 的形式,但这个 <em>loss</em> 却经常被称为 <em>cross-entropy loss</em> . 如何理解这样的叫法呢? </p>
-<p>首先, 对于样本 $x$ , 它只能属于某一个类别, 也就是它服从真实分布 $p = [0, 0, \cdots , 1(属于第j个类别的概率), \cdots ,0]$. 比值项 $\frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}$ 可以看做(注意只是看做, 因为这里计算出的概率数值上并没有很确切的意义, 把它们进行排序得到的 order 相对意义更明确: 属于各个类别的可能性大小的排序)我们模型估计的样本 $x$(属于类别j) 属于 $j$ 的概率, 这个值在真实分布 $p$ 中应该是1, 但是我们的估计值一般是小于1的. 类似我们写出估计出的分布 $q = [\frac{e^{f_1}}{\sum_{i = 1}^k e^{f_i}}, \frac{e^{f_2}}{\sum_{i = 1}^k e^{f_i}}, \cdots ,\frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}, \cdots ,\frac{e^{f_k}}{\sum_{i = 1}^k e^{f_i}}]$. </p>
-<ul>
-<li><p>单纯从概率的角度看, 最小化 <em>loss</em> 的过程就是在最大化$\frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}$, 这符合我们的想象. 模型赋予正确分类上的概率越大, 我们自然认为这个模型的估计很合理.</p>
-</li>
-<li><p>我们也可以从熵的角度来看这个 <em>loss</em> . 很明显, 真实分布 $p$ 和估计分布 $q$ 之间的交叉熵为<br>$$<br>\begin{aligned}<br>H(p,q) &amp;= - \sum_{k = 1}^K p(x = k)log(q(x = k))\\<br>&amp;=-p(x = j)log(q(x=k))\\<br>&amp;= -log \frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}\\<br>&amp;= L<br>\end{aligned}<br>$$<br>于是, 当我们最小化 $L$ 时, 我们也相当于在最小化 $p$, $q$ 之间的交叉熵. 而该交叉熵的下界应该是 $H(p)$. 这样我们也可以认为在最小化 $KL(p~||~q) = H(p,q) - H(p)$, 即 $p$ 和 $q$ 之间的 <em>KL divergence</em>. 把它优化得越小, $p$ 和 $q$ 就越接近, 就认为我们估计得越好.</p>
-<p>​</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
 
           
@@ -426,8 +285,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/12/Cross-entropy-与-Softmax/"
-           data-title="Cross-entropy and Softmax relation" data-url="https://zhangyuygss.github.io/2017/03/12/Cross-entropy-与-Softmax/">
+      <div class="ds-thread" data-thread-key="about.html"
+           data-title="" data-url="https://zhangyuygss.github.io/about.html">
       </div>
     
   </div>
@@ -451,17 +310,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/938.png"
@@ -523,22 +373,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cross-entropy-交叉熵"><span class="nav-number">1.</span> <span class="nav-text">Cross-entropy(交叉熵)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Entropy-熵"><span class="nav-number">1.0.1.</span> <span class="nav-text">Entropy(熵)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-entropy-交叉熵-1"><span class="nav-number">1.0.2.</span> <span class="nav-text">Cross-entropy(交叉熵)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Softmax-Classifier"><span class="nav-number">1.0.3.</span> <span class="nav-text">Softmax Classifier</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -644,10 +478,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
 
   
 
