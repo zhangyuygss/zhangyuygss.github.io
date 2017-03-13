@@ -91,19 +91,16 @@
 
 
 
-<meta name="description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.
-Entropy(熵)首先介绍熵的概念. 类似于物理学里用来描述系统混乱程">
+<meta name="description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cross-entropy and Softmax relation">
 <meta property="og:url" content="https://zhangyuygss.github.io/2017/03/12/Cross-entropy-与-Softmax/index.html">
 <meta property="og:site_name" content="Zhang Yu's notes">
-<meta property="og:description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.
-Entropy(熵)首先介绍熵的概念. 类似于物理学里用来描述系统混乱程">
-<meta property="og:updated_time" content="2017-03-13T09:19:46.993Z">
+<meta property="og:description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.">
+<meta property="og:updated_time" content="2017-03-13T11:21:49.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cross-entropy and Softmax relation">
-<meta name="twitter:description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.
-Entropy(熵)首先介绍熵的概念. 类似于物理学里用来描述系统混乱程">
+<meta name="twitter:description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.">
 
 
 
@@ -214,6 +211,16 @@ Entropy(熵)首先介绍熵的概念. 类似于物理学里用来描述系统混
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -349,7 +356,7 @@ Entropy(熵)首先介绍熵的概念. 类似于物理学里用来描述系统混
       
 
       
-        <h1 id="Cross-entropy-交叉熵"><a href="#Cross-entropy-交叉熵" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h1><p>信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.</p>
+        <h1 id="Cross-entropy-交叉熵"><a href="#Cross-entropy-交叉熵" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h1><p>信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.<br><a id="more"></a></p>
 <h3 id="Entropy-熵"><a href="#Entropy-熵" class="headerlink" title="Entropy(熵)"></a>Entropy(熵)</h3><p>首先介绍熵的概念. 类似于物理学里用来描述系统混乱程度, 这里的熵用来表示某服从分布 $p$ 的随机变量 $X$ 的不确定程度. 符号表示位 $H(p)$ 或者 $H(X)$. 具体计算公式为:<br>$$<br>H(p) = E(-plog(p))<br>$$</p>
 <p>具体如何计算这里的熵:</p>
 <ul>
@@ -491,6 +498,17 @@ Entropy(熵)首先介绍熵的概念. 类似于物理学里用来描述系统混
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhangyuygss" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
           
         </div>
 

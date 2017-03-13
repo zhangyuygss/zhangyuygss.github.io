@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhangyuygss.github.io/"/>
-  <updated>2017-03-13T09:19:46.993Z</updated>
+  <updated>2017-03-13T11:21:49.987Z</updated>
   <id>https://zhangyuygss.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="https://zhangyuygss.github.io/2017/03/12/Cross-entropy-%E4%B8%8E-Softmax/"/>
     <id>https://zhangyuygss.github.io/2017/03/12/Cross-entropy-与-Softmax/</id>
     <published>2017-03-12T08:56:56.000Z</published>
-    <updated>2017-03-13T09:19:46.993Z</updated>
+    <updated>2017-03-13T11:21:49.987Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Cross-entropy-交叉熵"><a href="#Cross-entropy-交叉熵" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h1><p>信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.</p>
+    <content type="html"><![CDATA[<h1 id="Cross-entropy-交叉熵"><a href="#Cross-entropy-交叉熵" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h1><p>信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.<br><a id="more"></a></p>
 <h3 id="Entropy-熵"><a href="#Entropy-熵" class="headerlink" title="Entropy(熵)"></a>Entropy(熵)</h3><p>首先介绍熵的概念. 类似于物理学里用来描述系统混乱程度, 这里的熵用来表示某服从分布 $p$ 的随机变量 $X$ 的不确定程度. 符号表示位 $H(p)$ 或者 $H(X)$. 具体计算公式为:<br>$$<br>H(p) = E(-plog(p))<br>$$</p>
 <p>具体如何计算这里的熵:</p>
 <ul>
@@ -48,7 +48,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Cross-entropy-交叉熵&quot;&gt;&lt;a href=&quot;#Cross-entropy-交叉熵&quot; class=&quot;headerlink&quot; title=&quot;Cross-entropy(交叉熵)&quot;&gt;&lt;/a&gt;Cross-entropy(交叉熵)&lt;/h1&gt;&lt;p&gt;信息论要求以最小
+      &lt;h1 id=&quot;Cross-entropy-交叉熵&quot;&gt;&lt;a href=&quot;#Cross-entropy-交叉熵&quot; class=&quot;headerlink&quot; title=&quot;Cross-entropy(交叉熵)&quot;&gt;&lt;/a&gt;Cross-entropy(交叉熵)&lt;/h1&gt;&lt;p&gt;信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.&lt;br&gt;
     
     </summary>
     
