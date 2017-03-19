@@ -91,16 +91,16 @@
 
 
 
-<meta name="description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.">
+<meta name="description" content="基本牛顿方法基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 hesse 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 因其收敛准则的要求, 初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cross-entropy and Softmax relation">
-<meta property="og:url" content="https://zhangyuygss.github.io/2017/03/12/Cross-entropy-与-Softmax/index.html">
+<meta property="og:title" content="牛顿法和拟牛顿法测试">
+<meta property="og:url" content="https://zhangyuygss.github.io/2017/03/19/牛顿法和拟牛顿法测试/index.html">
 <meta property="og:site_name" content="Zhang Yu's notes">
-<meta property="og:description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.">
-<meta property="og:updated_time" content="2017-03-13T11:21:49.987Z">
+<meta property="og:description" content="基本牛顿方法基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 hesse 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 因其收敛准则的要求, 初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点.">
+<meta property="og:updated_time" content="2017-03-19T06:47:12.375Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cross-entropy and Softmax relation">
-<meta name="twitter:description" content="Cross-entropy(交叉熵)信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.">
+<meta name="twitter:title" content="牛顿法和拟牛顿法测试">
+<meta name="twitter:description" content="基本牛顿方法基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 hesse 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 因其收敛准则的要求, 初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点.">
 
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://zhangyuygss.github.io/2017/03/12/Cross-entropy-与-Softmax/"/>
+  <link rel="canonical" href="https://zhangyuygss.github.io/2017/03/19/牛顿法和拟牛顿法测试/"/>
 
 
 
 
 
-  <title> Cross-entropy and Softmax relation | Zhang Yu's notes </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 牛顿法和拟牛顿法测试 | Zhang Yu's notes </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -263,7 +263,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://zhangyuygss.github.io/2017/03/12/Cross-entropy-与-Softmax/">
+    <link itemprop="mainEntityOfPage" href="https://zhangyuygss.github.io/2017/03/19/牛顿法和拟牛顿法测试/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yu Zhang">
@@ -284,7 +284,7 @@
             
             
               
-                Cross-entropy and Softmax relation
+                牛顿法和拟牛顿法测试
               
             
           </h1>
@@ -299,8 +299,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-12T16:56:56+08:00">
-                2017-03-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T09:40:31+08:00">
+                2017-03-19
               </time>
             
 
@@ -318,8 +318,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/12/Cross-entropy-与-Softmax/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/12/Cross-entropy-与-Softmax/" itemprop="commentCount"></span>
+                <a href="/2017/03/19/牛顿法和拟牛顿法测试/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/19/牛顿法和拟牛顿法测试/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -327,7 +327,7 @@
 
           
           
-             <span id="/2017/03/12/Cross-entropy-与-Softmax/" class="leancloud_visitors" data-flag-title="Cross-entropy and Softmax relation">
+             <span id="/2017/03/19/牛顿法和拟牛顿法测试/" class="leancloud_visitors" data-flag-title="牛顿法和拟牛顿法测试">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -356,28 +356,85 @@
       
 
       
-        <h1 id="Cross-entropy-交叉熵"><a href="#Cross-entropy-交叉熵" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h1><p>信息论要求以最小的成本来传递和表达信息. 比如要给文本编码, 就会给出现次数多的词更短的编码, 而不常见的词的码长会设置的长一些, 这样在传递这份信息时总体需要的码长就会较短. 为了实现这种编码, 需要了解想要描述事物的分布, 这样就和概率分布有了联系, 进而会和机器学习里的问题产生联系.<br><a id="more"></a></p>
-<h3 id="Entropy-熵"><a href="#Entropy-熵" class="headerlink" title="Entropy(熵)"></a>Entropy(熵)</h3><p>首先介绍熵的概念. 类似于物理学里用来描述系统混乱程度, 这里的熵用来表示某服从分布 $p$ 的随机变量 $X$ 的不确定程度. 符号表示位 $H(p)$ 或者 $H(X)$. 具体计算公式为:<br>$$<br>H(p) = E(-plog(p))<br>$$</p>
-<p>具体如何计算这里的熵:</p>
-<ul>
-<li>对于离散分布 $p$ : $H(p) = -\sum_{k = 1}^K p(X = k)log(p(X = k))$. 比如伯努利分布的 entropy 为 $H(p) = -(p(X = 0)log(p(X = 0)) + p(X = 1)log(p(X = 1))) \approx 0.69$. (此处 $log$ 取自然底数 $e$)</li>
-<li>对于连续分布 $p$ 取相应的积分即可: $H(p) = -\int p(X)log(p(X)) dx$.        </li>
-</ul>
-<p>从计算公式中可以看出当 $X$ 服从均匀分布时, $H(p)$ 的值会取到最大, 也就是分布最不确定; 当分布 $p$ 在某点处概率为脉冲时, 不确定性最小, $H(p)$ 也最小. </p>
-<p>像一开始介绍的那样, 熵可以理解为在分布 $p$ 下表达 $X$ 所需的期望编码长度. </p>
-<h3 id="Cross-entropy-交叉熵-1"><a href="#Cross-entropy-交叉熵-1" class="headerlink" title="Cross-entropy(交叉熵)"></a>Cross-entropy(交叉熵)</h3><p>有了熵的概念, 下面介绍交叉熵 <em>cross-entropy</em> . 假如对于 $X$ ,我们有了真实的概率分布 $p$, 就能计算表达 $X$ 需要的编码长度. 这种编码是按照 $X$ 的准确分布量身定制的, 因此是描述 $X$ 的最小编码长度. 而如果我们没有按照分布 $p$ 来表示 $X$, 而采用了另一个估计的概率分布 $q$ 来描述 $X$, 直观上来说, 我们会认为此时需要更多的编码来描述 $X$. 事实上也确实如此. 我们定义交叉熵 $H(p,q)$ 来表示使用错误的分布 $q$ 来表达 $X$ 时需要的平均编码长度:<br>$$<br>H(p,q) = E(-plog(q))<br>$$<br>在离散分布时为: $H(p,q) = - \sum_{k = 1}^K p(X = k)log(q(X = k))$.</p>
-<p>做差引入一个重要的概念 <em>KL divergence</em>:<br>$$<br>\begin{aligned}<br>KL(p||q) &amp;= H(p,q) - H(p)\\<br>&amp;= \sum_{k = 1}^K p(X=k)log \frac{p(X = k)}{q(X = k)}\\<br>&amp;\ge 0<br>\end{aligned}<br>$$<br>使用 <em>Jensen 不等式</em> 可以证明(后面给出) <em>KL divergence</em> 一定大于等于0, 也就是使用错误的编码表达 $X$ 时需要耗费更多的编码数. 当且仅当 $p = q$ 时等号成立.</p>
-<p>除了表达多用的编码长度外, <em>KL divergence</em> 还有某种意义上的 ‘距离’ 含义, 它表示了两个分布 $p$ 和 $q$ 之间的差别. 相比于表示两个分布之间线性相关性的 <em>相关</em> , KL 距离能够表达 $p$ 和 $q$之间的更多比较信息. </p>
-<h3 id="Softmax-Classifier"><a href="#Softmax-Classifier" class="headerlink" title="Softmax Classifier"></a>Softmax Classifier</h3><p>机器学习中的分类器 <em>softmax</em> 使用了 <em>cross-entropy</em>. 该 <em>loss</em> 被广泛应用于神经网络中.</p>
-<p>对于 $k$ 个类别的分类问题, 使用线性响应函数 $f(x)_r = w_r^Tx (r = 1,2\cdots k)$ 把样本 $x$ 映射成第 $r$ 个分类上的’’得分’’. 于是若某个样本 $x$属于类别 $j$ , 则得到该样本上的 <em>loss function</em> :<br>$$<br>L = -log\frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}<br>$$<br>该损失函数包含  <em>softmax function</em> 的形式,但这个 <em>loss</em> 却经常被称为 <em>cross-entropy loss</em> . 如何理解这样的叫法呢? </p>
-<p>首先, 对于样本 $x$ , 它只能属于某一个类别, 也就是它服从真实分布 $p = [0, 0, \cdots , 1(属于第j个类别的概率), \cdots ,0]$. 比值项 $\frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}$ 可以看做(注意只是看做, 因为这里计算出的概率数值上并没有很确切的意义, 把它们进行排序得到的 order 相对意义更明确: 属于各个类别的可能性大小的排序)我们模型估计的样本 $x$(属于类别j) 属于 $j$ 的概率, 这个值在真实分布 $p$ 中应该是1, 但是我们的估计值一般是小于1的. 类似我们写出估计出的分布 $q = [\frac{e^{f_1}}{\sum_{i = 1}^k e^{f_i}}, \frac{e^{f_2}}{\sum_{i = 1}^k e^{f_i}}, \cdots ,\frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}, \cdots ,\frac{e^{f_k}}{\sum_{i = 1}^k e^{f_i}}]$. </p>
-<ul>
-<li><p>单纯从概率的角度看, 最小化 <em>loss</em> 的过程就是在最大化$\frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}$, 这符合我们的想象. 模型赋予正确分类上的概率越大, 我们自然认为这个模型的估计很合理.</p>
-</li>
-<li><p>我们也可以从熵的角度来看这个 <em>loss</em> . 很明显, 真实分布 $p$ 和估计分布 $q$ 之间的交叉熵为<br>$$<br>\begin{aligned}<br>H(p,q) &amp;= - \sum_{k = 1}^K p(x = k)log(q(x = k))\\<br>&amp;=-p(x = j)log(q(x=k))\\<br>&amp;= -log \frac{e^{f_j}}{\sum_{i = 1}^k e^{f_i}}\\<br>&amp;= L<br>\end{aligned}<br>$$<br>于是, 当我们最小化 $L$ 时, 我们也相当于在最小化 $p$, $q$ 之间的交叉熵. 而该交叉熵的下界应该是 $H(p)$. 这样我们也可以认为在最小化 $KL(p~||~q) = H(p,q) - H(p)$, 即 $p$ 和 $q$ 之间的 <em>KL divergence</em>. 把它优化得越小, $p$ 和 $q$ 就越接近, 就认为我们估计得越好.</p>
-<p>​</p>
-</li>
-</ul>
+        <h4 id="基本牛顿方法"><a href="#基本牛顿方法" class="headerlink" title="基本牛顿方法"></a>基本牛顿方法</h4><p>基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 <em>hesse</em> 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 因其收敛准则的要求, 初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点. </p>
+<a id="more"></a>
+<p>下面用两个不同初始点测试函数<br>$$<br>f(x) = \frac{x_1^4}{12} + \frac{x_1^2}{2} + x_2arctanx_2 - \frac{ln(x_2^2 + 1)}{2}<br>$$</p>
+<p>它的一阶到和 <em>hesse</em> 阵分别为<br>$$<br>g(x) = [x_1^2/3 + x_1 ~, ~ arctanx_2 ]’<br>$$</p>
+<p>$$<br>G(x) = \begin{bmatrix}<br>x_1^2+1 &amp; 0\\<br>0 &amp; \frac{1}{x_2^2+1}<br>\end{bmatrix}<br>$$</p>
+<p>基本牛顿法代码:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="params">[x, val, k]</span> = <span class="title">newton_basic</span><span class="params">(f, g, hesse, x0, ifplot)</span></span></div><div class="line">	<span class="comment">%% Basic newton's method</span></div><div class="line">	<span class="comment">% x: result point  val: result value  k: total iterations</span></div><div class="line">	<span class="comment">% f: function to be optimized  g: gradient of f  x0: start point, column vector</span></div><div class="line">	<span class="comment">% ifplot: 1, plot figure  hesse: Hesse matrix of f	</span></div><div class="line">	maxiter = <span class="number">500</span>;</div><div class="line">	epsilon = <span class="number">1e-5</span>;</div><div class="line"></div><div class="line">	xs = x0;</div><div class="line">	ys = feval(f, x0);</div><div class="line"></div><div class="line">	<span class="keyword">for</span> iter = <span class="number">1</span>:maxiter</div><div class="line">		f_x0 = feval(f, x0);</div><div class="line">		grad_x0 = feval(g, x0);</div><div class="line">		<span class="comment">% Record optimization</span></div><div class="line">		<span class="keyword">if</span>(iter &gt;= <span class="number">1</span>)</div><div class="line">			xs = [xs; x0<span class="string">'];			</span></div><div class="line">			ys = [ys; f_x0];</div><div class="line">		end</div><div class="line">		disp(['iteration <span class="string">' num2str(iter-1) '</span>  current f: <span class="string">' num2str(f_x0)]);</span></div><div class="line">		if(norm(grad_x0) &lt; epsilon)</div><div class="line">			disp('Optimization done!<span class="string">')</span></div><div class="line">			break;</div><div class="line">		else</div><div class="line">			h_x0 = feval(hesse, x0);</div><div class="line">			d = -inv(h_x0)*grad_x0;</div><div class="line">			x0 = x0 + d;</div><div class="line">		end</div><div class="line">	end</div><div class="line">	x = x0;</div><div class="line">	val = f_x0;</div><div class="line">	k = iter;</div><div class="line"></div><div class="line">	if(ifplot &amp; length(x0)==2)		% Can only plot 2 dimension x variable figures</div><div class="line">		x1 = [x0(1)-2 : 0.1 : x0(1)+2]';</div><div class="line">		x2 = [x0(<span class="number">2</span>)<span class="number">-2</span> : <span class="number">0.1</span> : x0(<span class="number">2</span>)+<span class="number">2</span>]';</div><div class="line">		y = <span class="built_in">zeros</span>(<span class="built_in">length</span>(x1), <span class="built_in">length</span>(x2));</div><div class="line">		<span class="keyword">for</span> ii = <span class="number">1</span>:<span class="built_in">length</span>(x1)</div><div class="line">			<span class="keyword">for</span> jj = <span class="number">1</span>:<span class="built_in">length</span>(x2)</div><div class="line">				y(ii, jj) = feval(f, [x1(ii), x2(jj)]);</div><div class="line">			<span class="keyword">end</span></div><div class="line">		<span class="keyword">end</span></div><div class="line">		surfc(x1, x2, y); hold on;</div><div class="line">		p = plot3(xs(<span class="number">1</span>,:), xs(<span class="number">2</span>,:), ys, <span class="string">'r'</span>);</div><div class="line">		p.Marker = <span class="string">'*'</span>;</div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>运行代码.</p>
+<p>初始点选取 $x^{(0)} = [1, 0.7]’$ 时运行结果:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><em>Iter</em></th>
+<th style="text-align:center">$x$</th>
+<th style="text-align:center">$f(x)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">[1, 0.7]’</td>
+<td style="text-align:center">0.8115</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">[0.33, -0.21]’</td>
+<td style="text-align:center">0.0785</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">[0.02, 0.0061]’</td>
+<td style="text-align:center">0.0003</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">[0, 0]</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<p>很快收敛到极小值点.</p>
+<p>初始点选取 $x^{(1)} = [1, 2]’$ 时运行结果:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><em>Iter</em></th>
+<th style="text-align:center">$x$</th>
+<th style="text-align:center">$f(x)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">[1,2]’</td>
+<td style="text-align:center">1.9929</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">[0.33, -3.54]’</td>
+<td style="text-align:center">3.3346</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">[0.02, 13.95]’</td>
+<td style="text-align:center">18.2780</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">[7e-6, -279.34]’</td>
+<td style="text-align:center">432.1602</td>
+</tr>
+<tr>
+<td style="text-align:center">……</td>
+<td style="text-align:center">……</td>
+<td style="text-align:center">……</td>
+</tr>
+</tbody>
+</table>
+<p>函数值随迭代增大, 方法失效.</p>
 
       
     </div>
@@ -408,15 +465,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/03/12/Cross-entropy-与-Softmax/" rel="next" title="Cross-entropy and Softmax relation">
+                <i class="fa fa-chevron-left"></i> Cross-entropy and Softmax relation
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/19/牛顿法和拟牛顿法测试/" rel="prev" title="牛顿法和拟牛顿法测试">
-                牛顿法和拟牛顿法测试 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -442,8 +499,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/12/Cross-entropy-与-Softmax/"
-           data-title="Cross-entropy and Softmax relation" data-url="https://zhangyuygss.github.io/2017/03/12/Cross-entropy-与-Softmax/">
+      <div class="ds-thread" data-thread-key="2017/03/19/牛顿法和拟牛顿法测试/"
+           data-title="牛顿法和拟牛顿法测试" data-url="https://zhangyuygss.github.io/2017/03/19/牛顿法和拟牛顿法测试/">
       </div>
     
   </div>
@@ -549,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cross-entropy-交叉熵"><span class="nav-number">1.</span> <span class="nav-text">Cross-entropy(交叉熵)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Entropy-熵"><span class="nav-number">1.0.1.</span> <span class="nav-text">Entropy(熵)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-entropy-交叉熵-1"><span class="nav-number">1.0.2.</span> <span class="nav-text">Cross-entropy(交叉熵)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Softmax-Classifier"><span class="nav-number">1.0.3.</span> <span class="nav-text">Softmax Classifier</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本牛顿方法"><span class="nav-number">1.</span> <span class="nav-text">基本牛顿方法</span></a></li></ol></div>
             
 
           </div>
