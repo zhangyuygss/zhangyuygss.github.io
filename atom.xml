@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhangyuygss.github.io/"/>
-  <updated>2017-03-19T06:47:12.375Z</updated>
+  <updated>2017-03-27T08:44:09.601Z</updated>
   <id>https://zhangyuygss.github.io/</id>
   
   <author>
@@ -16,16 +16,16 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>牛顿法和拟牛顿法测试</title>
-    <link href="https://zhangyuygss.github.io/2017/03/19/%E7%89%9B%E9%A1%BF%E6%B3%95%E5%92%8C%E6%8B%9F%E7%89%9B%E9%A1%BF%E6%B3%95%E6%B5%8B%E8%AF%95/"/>
-    <id>https://zhangyuygss.github.io/2017/03/19/牛顿法和拟牛顿法测试/</id>
+    <title>基本牛顿法测试</title>
+    <link href="https://zhangyuygss.github.io/2017/03/19/%E5%9F%BA%E6%9C%AC%E7%89%9B%E9%A1%BF%E6%B3%95%E6%B5%8B%E8%AF%95/"/>
+    <id>https://zhangyuygss.github.io/2017/03/19/基本牛顿法测试/</id>
     <published>2017-03-19T01:40:31.000Z</published>
-    <updated>2017-03-19T06:47:12.375Z</updated>
+    <updated>2017-03-27T08:44:09.601Z</updated>
     
     <content type="html"><![CDATA[<h4 id="基本牛顿方法"><a href="#基本牛顿方法" class="headerlink" title="基本牛顿方法"></a>基本牛顿方法</h4><p>基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 <em>hesse</em> 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 因其收敛准则的要求, 初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点. </p>
 <a id="more"></a>
 <p>下面用两个不同初始点测试函数<br>$$<br>f(x) = \frac{x_1^4}{12} + \frac{x_1^2}{2} + x_2arctanx_2 - \frac{ln(x_2^2 + 1)}{2}<br>$$</p>
-<p>它的一阶到和 <em>hesse</em> 阵分别为<br>$$<br>g(x) = [x_1^2/3 + x_1 ~, ~ arctanx_2 ]’<br>$$</p>
+<p>它的一阶导和 <em>hesse</em> 阵分别为<br>$$<br>g(x) = [x_1^2/3 + x_1 ~, ~ arctanx_2 ]’<br>$$</p>
 <p>$$<br>G(x) = \begin{bmatrix}<br>x_1^2+1 &amp; 0\\<br>0 &amp; \frac{1}{x_2^2+1}<br>\end{bmatrix}<br>$$</p>
 <p>基本牛顿法代码:</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="params">[x, val, k]</span> = <span class="title">newton_basic</span><span class="params">(f, g, hesse, x0, ifplot)</span></span></div><div class="line">	<span class="comment">%% Basic newton's method</span></div><div class="line">	<span class="comment">% x: result point  val: result value  k: total iterations</span></div><div class="line">	<span class="comment">% f: function to be optimized  g: gradient of f  x0: start point, column vector</span></div><div class="line">	<span class="comment">% ifplot: 1, plot figure  hesse: Hesse matrix of f	</span></div><div class="line">	maxiter = <span class="number">500</span>;</div><div class="line">	epsilon = <span class="number">1e-5</span>;</div><div class="line"></div><div class="line">	xs = x0;</div><div class="line">	ys = feval(f, x0);</div><div class="line"></div><div class="line">	<span class="keyword">for</span> iter = <span class="number">1</span>:maxiter</div><div class="line">		f_x0 = feval(f, x0);</div><div class="line">		grad_x0 = feval(g, x0);</div><div class="line">		<span class="comment">% Record optimization</span></div><div class="line">		<span class="keyword">if</span>(iter &gt;= <span class="number">1</span>)</div><div class="line">			xs = [xs; x0<span class="string">'];			</span></div><div class="line">			ys = [ys; f_x0];</div><div class="line">		end</div><div class="line">		disp(['iteration <span class="string">' num2str(iter-1) '</span>  current f: <span class="string">' num2str(f_x0)]);</span></div><div class="line">		if(norm(grad_x0) &lt; epsilon)</div><div class="line">			disp('Optimization done!<span class="string">')</span></div><div class="line">			break;</div><div class="line">		else</div><div class="line">			h_x0 = feval(hesse, x0);</div><div class="line">			d = -inv(h_x0)*grad_x0;</div><div class="line">			x0 = x0 + d;</div><div class="line">		end</div><div class="line">	end</div><div class="line">	x = x0;</div><div class="line">	val = f_x0;</div><div class="line">	k = iter;</div><div class="line"></div><div class="line">	if(ifplot &amp; length(x0)==2)		% Can only plot 2 dimension x variable figures</div><div class="line">		x1 = [x0(1)-2 : 0.1 : x0(1)+2]';</div><div class="line">		x2 = [x0(<span class="number">2</span>)<span class="number">-2</span> : <span class="number">0.1</span> : x0(<span class="number">2</span>)+<span class="number">2</span>]';</div><div class="line">		y = <span class="built_in">zeros</span>(<span class="built_in">length</span>(x1), <span class="built_in">length</span>(x2));</div><div class="line">		<span class="keyword">for</span> ii = <span class="number">1</span>:<span class="built_in">length</span>(x1)</div><div class="line">			<span class="keyword">for</span> jj = <span class="number">1</span>:<span class="built_in">length</span>(x2)</div><div class="line">				y(ii, jj) = feval(f, [x1(ii), x2(jj)]);</div><div class="line">			<span class="keyword">end</span></div><div class="line">		<span class="keyword">end</span></div><div class="line">		surfc(x1, x2, y); hold on;</div><div class="line">		p = plot3(xs(<span class="number">1</span>,:), xs(<span class="number">2</span>,:), ys, <span class="string">'r'</span>);</div><div class="line">		p.Marker = <span class="string">'*'</span>;</div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
@@ -101,6 +101,104 @@
 </tbody>
 </table>
 <p>函数值随迭代增大, 方法失效.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;基本牛顿方法&quot;&gt;&lt;a href=&quot;#基本牛顿方法&quot; class=&quot;headerlink&quot; title=&quot;基本牛顿方法&quot;&gt;&lt;/a&gt;基本牛顿方法&lt;/h4&gt;&lt;p&gt;基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 &lt;em&gt;hesse&lt;/em&gt; 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 因其收敛准则的要求, 初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点. &lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>基本牛顿法测试</title>
+    <link href="https://zhangyuygss.github.io/2017/03/19/%E7%89%9B%E9%A1%BF%E6%B3%95%E5%92%8C%E6%8B%9F%E7%89%9B%E9%A1%BF%E6%B3%95%E6%B5%8B%E8%AF%95/"/>
+    <id>https://zhangyuygss.github.io/2017/03/19/牛顿法和拟牛顿法测试/</id>
+    <published>2017-03-19T01:40:31.000Z</published>
+    <updated>2017-03-27T09:01:34.083Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="基本牛顿方法"><a href="#基本牛顿方法" class="headerlink" title="基本牛顿方法"></a>基本牛顿方法</h4><p>基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 <em>hesse</em> 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 因其收敛准则的要求, 初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点. </p>
+<a id="more"></a>
+<p>下面用两个不同初始点测试函数<br>$$<br>f(x) = \frac{x_1^4}{12} + \frac{x_1^2}{2} + x_2arctanx_2 - \frac{ln(x_2^2 + 1)}{2}<br>$$</p>
+<p>它的一阶导和 <em>hesse</em> 阵分别为<br>$$<br>g(x) = [x_1^2/3 + x_1 ~, ~ arctanx_2 ]’<br>$$</p>
+<p>$$<br>G(x) = \begin{bmatrix}<br>x_1^2+1 &amp; 0\\<br>0 &amp; \frac{1}{x_2^2+1}<br>\end{bmatrix}<br>$$</p>
+<p>基本牛顿法代码:</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="params">[x, val, k]</span> = <span class="title">newton_basic</span><span class="params">(f, g, hesse, x0, ifplot)</span></span></div><div class="line">	<span class="comment">%% Basic newton's method</span></div><div class="line">	<span class="comment">% x: result point  val: result value  k: total iterations</span></div><div class="line">	<span class="comment">% f: function to be optimized  g: gradient of f  x0: start point, column vector</span></div><div class="line">	<span class="comment">% ifplot: 1, plot figure  hesse: Hesse matrix of f	</span></div><div class="line">	maxiter = <span class="number">500</span>;</div><div class="line">	epsilon = <span class="number">1e-5</span>;</div><div class="line"></div><div class="line">	xs = x0;</div><div class="line">	ys = feval(f, x0);</div><div class="line"></div><div class="line">	<span class="keyword">for</span> iter = <span class="number">1</span>:maxiter</div><div class="line">		f_x0 = feval(f, x0);</div><div class="line">		grad_x0 = feval(g, x0);</div><div class="line">		<span class="comment">% Record optimization</span></div><div class="line">		<span class="keyword">if</span>(iter &gt;= <span class="number">1</span>)</div><div class="line">			xs = [xs; x0<span class="string">'];			</span></div><div class="line">			ys = [ys; f_x0];</div><div class="line">		end</div><div class="line">		disp(['iteration <span class="string">' num2str(iter-1) '</span>  current f: <span class="string">' num2str(f_x0)]);</span></div><div class="line">		if(norm(grad_x0) &lt; epsilon)</div><div class="line">			disp('Optimization done!<span class="string">')</span></div><div class="line">			break;</div><div class="line">		else</div><div class="line">			h_x0 = feval(hesse, x0);</div><div class="line">			d = -inv(h_x0)*grad_x0;</div><div class="line">			x0 = x0 + d;</div><div class="line">		end</div><div class="line">	end</div><div class="line">	x = x0;</div><div class="line">	val = f_x0;</div><div class="line">	k = iter;</div><div class="line"></div><div class="line">	if(ifplot &amp; length(x0)==2)		% Can only plot 2 dimension x variable figures</div><div class="line">		x1 = [x0(1)-2 : 0.1 : x0(1)+2]';</div><div class="line">		x2 = [x0(<span class="number">2</span>)<span class="number">-2</span> : <span class="number">0.1</span> : x0(<span class="number">2</span>)+<span class="number">2</span>]';</div><div class="line">		y = <span class="built_in">zeros</span>(<span class="built_in">length</span>(x1), <span class="built_in">length</span>(x2));</div><div class="line">		<span class="keyword">for</span> ii = <span class="number">1</span>:<span class="built_in">length</span>(x1)</div><div class="line">			<span class="keyword">for</span> jj = <span class="number">1</span>:<span class="built_in">length</span>(x2)</div><div class="line">				y(ii, jj) = feval(f, [x1(ii), x2(jj)]);</div><div class="line">			<span class="keyword">end</span></div><div class="line">		<span class="keyword">end</span></div><div class="line">		surfc(x1, x2, y); hold on;</div><div class="line">		p = plot3(xs(<span class="number">1</span>,:), xs(<span class="number">2</span>,:), ys, <span class="string">'r'</span>);</div><div class="line">		p.Marker = <span class="string">'*'</span>;</div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>运行代码.</p>
+<p>初始点选取 $x^{(0)} = [1, 0.7]’$ 时运行结果:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><em>Iter</em></th>
+<th style="text-align:center">$x$</th>
+<th style="text-align:center">$f(x)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">[1, 0.7]’</td>
+<td style="text-align:center">0.8115</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">[0.33, -0.21]’</td>
+<td style="text-align:center">0.0785</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">[0.02, 0.0061]’</td>
+<td style="text-align:center">0.0003</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">[0, 0]</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<p>很快收敛到极小值点.</p>
+<p>初始点选取 $x^{(1)} = [1, 2]’$ 时运行结果:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><em>Iter</em></th>
+<th style="text-align:center">$x$</th>
+<th style="text-align:center">$f(x)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">[1,2]’</td>
+<td style="text-align:center">1.9929</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">[0.33, -3.54]’</td>
+<td style="text-align:center">3.3346</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">[0.02, 13.95]’</td>
+<td style="text-align:center">18.2780</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">[7e-6, -279.34]’</td>
+<td style="text-align:center">432.1602</td>
+</tr>
+<tr>
+<td style="text-align:center">……</td>
+<td style="text-align:center">……</td>
+<td style="text-align:center">……</td>
+</tr>
+</tbody>
+</table>
+<p>函数值随迭代增大, 方法失效.</p>
+<p><img src="src/basic_newton.jpg" alt="basic newton"></p>
 ]]></content>
     
     <summary type="html">
