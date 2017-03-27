@@ -91,17 +91,17 @@
 
 
 
-<meta name="description" content="基本牛顿方法基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 hesse 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 因其收敛准则的要求, 初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点.">
+<meta name="description" content="基本牛顿方法基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$, 步长取1. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 hesse 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 其具有局部收敛性, 即初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基本牛顿法测试">
 <meta property="og:url" content="https://zhangyuygss.github.io/2017/03/19/基本牛顿法测试/index.html">
 <meta property="og:site_name" content="Zhang Yu's notes">
-<meta property="og:description" content="基本牛顿方法基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 hesse 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 因其收敛准则的要求, 初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点.">
+<meta property="og:description" content="基本牛顿方法基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$, 步长取1. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 hesse 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 其具有局部收敛性, 即初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点.">
 <meta property="og:image" content="https://zhangyuygss.github.io/uploads/basic_newton.jpg">
-<meta property="og:updated_time" content="2017-03-27T09:11:34.542Z">
+<meta property="og:updated_time" content="2017-03-27T11:46:53.115Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基本牛顿法测试">
-<meta name="twitter:description" content="基本牛顿方法基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 hesse 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 因其收敛准则的要求, 初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点.">
+<meta name="twitter:description" content="基本牛顿方法基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$, 步长取1. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 hesse 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 其具有局部收敛性, 即初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点.">
 <meta name="twitter:image" content="https://zhangyuygss.github.io/uploads/basic_newton.jpg">
 
 
@@ -358,7 +358,7 @@
       
 
       
-        <h4 id="基本牛顿方法"><a href="#基本牛顿方法" class="headerlink" title="基本牛顿方法"></a>基本牛顿方法</h4><p>基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 <em>hesse</em> 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 因其收敛准则的要求, 初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点. </p>
+        <h4 id="基本牛顿方法"><a href="#基本牛顿方法" class="headerlink" title="基本牛顿方法"></a>基本牛顿方法</h4><p>基本牛顿方法, 迭代方向为 $d_k = -G_k^{-1}g_k$, 步长取1. 迭代公式为 $x_k = x_k + d_k$. 因为不能保证 <em>hesse</em> 矩阵正定, 导致无法保证 $d_k$ 为下降方向. 其具有局部收敛性, 即初始点距离最优点必须足够小, 否则迭代序列 $x{k}$ 就会收敛到鞍点或极大点. </p>
 <a id="more"></a>
 <p>下面用两个不同初始点测试函数<br>$$<br>f(x) = \frac{x_1^4}{12} + \frac{x_1^2}{2} + x_2arctanx_2 - \frac{ln(x_2^2 + 1)}{2}<br>$$</p>
 <p>它的一阶导和 <em>hesse</em> 阵分别为<br>$$<br>g(x) = [x_1^2/3 + x_1 ~, ~ arctanx_2 ]’<br>$$</p>
