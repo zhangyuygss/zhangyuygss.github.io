@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhangyuygss.github.io/"/>
-  <updated>2017-05-05T07:40:57.057Z</updated>
+  <updated>2017-05-05T07:47:15.019Z</updated>
   <id>https://zhangyuygss.github.io/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="https://zhangyuygss.github.io/2017/05/05/HSI-Classification/"/>
     <id>https://zhangyuygss.github.io/2017/05/05/HSI-Classification/</id>
     <published>2017-05-05T07:40:18.000Z</published>
-    <updated>2017-05-05T07:40:57.057Z</updated>
+    <updated>2017-05-05T07:47:15.019Z</updated>
     
     <content type="html"><![CDATA[<h3 id="高光谱图像分类实验"><a href="#高光谱图像分类实验" class="headerlink" title="高光谱图像分类实验"></a>高光谱图像分类实验</h3><p>参考论文 <em>[Hyperspectral Image Classification via kernel sparse representstion][1]</em> ，实现基于核方法（kernel）和稀疏表示（sparse representation）的高光谱图像分类算法。本文大致介绍论文中的方法和代码实现。文章是5、6年前提出的了，个人不是很了解最近这个方面最新的发展，似乎也有基于深度网络的分类算法出现。但从被引情况看这篇文章应该比较经典，而且从练手的角度看，实现核与稀疏表示这些经典方法相较于再套用一下神经网络也更有意义，因此实现其方法并简单介绍。</p>
 <a id="more"></a>
 <h4 id="方法介绍"><a href="#方法介绍" class="headerlink" title="方法介绍"></a>方法介绍</h4><h5 id="高光谱图像"><a href="#高光谱图像" class="headerlink" title="高光谱图像"></a>高光谱图像</h5><p>高光谱图像（Hyperspectral image）相较于传统的 RGB 图像有更多波段的信息。RGB图像有红绿蓝三个波段的信息，于是它的数字图像可用 <em>row x column x 3</em> 的 tensor 表示；而高光谱图像可能包含几百个波段上的信息，比如某高光谱图像包含200个波段信息，那么它的大小为 <em>row x column x 200</em> 。高光谱图像的这些波段包含了许多RGB图像中没有的信息，因此它可以用于图像中的物体分类和目标检测等很多任务。本文就介绍一种基于核与稀疏表示的高光谱图像内区域分类算法。</p>
 <h5 id="高光谱图像的分类"><a href="#高光谱图像的分类" class="headerlink" title="高光谱图像的分类"></a>高光谱图像的分类</h5><p>假设有一个高光谱图像，它的波段数为$B=200$。那么图像中一个点可以用一个200维的向量$x\in R^{B}$表示，整张图像包含 <em>row x column</em> 个这样的列向量。有监督分类任务中有部分点的类别信息已知，要设计算法使用这些已知类别的点来预测未知类别点的类别。实验中使用印第安农场的高光谱图像，它包含了所有需要预测的点的各个波段的信息和类别（Ground Truth），我们从中挑选出10%的点作为训练点，另外90%的点用于test评估算法性能。</p>
 <h5 id="高光谱图像的稀疏表示"><a href="#高光谱图像的稀疏表示" class="headerlink" title="高光谱图像的稀疏表示"></a>高光谱图像的稀疏表示</h5><p>假设我们现在有 <em>N</em> 个训练数据点，用矩阵 <em>A</em> 表示这些点的集合: $A = [a_1,a_2,\cdots ,a_N] \in R^{B\times N} , a_i \in R^B$ ,其中 $a_i$ 表示第 <em>i</em> 个训练点。那么图像中任意一个点可以用这些训练点的线性组合表示:<br>$$<br>\begin{align}<br>x &amp; \approx \alpha_1a_1+ \alpha_2a_2 + \cdots + \alpha_Na_N \\<br>&amp; = A\alpha<br>\end{align}<br>$$<br>其中 $\alpha \in R^N$ 为稀疏表示的系数向量，之所以叫稀疏表示，是因为系数向量$\alpha$这个N维向量中绝大部分元素都是0。也就是说，只要用少量训练数据点的线性组合就能很好地还原任意点的信息。截图直观地了解这种表示：</p>
-<p>![Sparse][<a href="https://zhangyuygss.github.io/uploads/basic_newton.jpg/sparseDemo.png">https://zhangyuygss.github.io/uploads/basic_newton.jpg/sparseDemo.png</a>]</p>
+<p>![Sparse][<a href="https://zhangyuygss.github.io/uploads/sparseDemo.png">https://zhangyuygss.github.io/uploads/sparseDemo.png</a>]</p>
 ]]></content>
     
     <summary type="html">
