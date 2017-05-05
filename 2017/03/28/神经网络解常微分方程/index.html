@@ -93,23 +93,22 @@
 
 <meta name="description" content="神经网络解常微分方程对于常微分方程
 $$\left{\begin{array}{c}\frac{dy}{dx}=x^3-\frac{y}{x}\\y(1)=\frac{2}{5}\end{array}\right.$$其精确解为 $y(x)=\frac{x^4}{5}+\frac{1}{5x}$ .
-下面用3层 1xNx1 神经网络解该问题。
-设 $f(x)=y_t=\frac{dy}{dx} =">
+下面用3层 1xNx1 神经网络解该问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="神经网络解常微分方程">
 <meta property="og:url" content="https://zhangyuygss.github.io/2017/03/28/神经网络解常微分方程/index.html">
 <meta property="og:site_name" content="Zhang Yu's notes">
 <meta property="og:description" content="神经网络解常微分方程对于常微分方程
 $$\left{\begin{array}{c}\frac{dy}{dx}=x^3-\frac{y}{x}\\y(1)=\frac{2}{5}\end{array}\right.$$其精确解为 $y(x)=\frac{x^4}{5}+\frac{1}{5x}$ .
-下面用3层 1xNx1 神经网络解该问题。
-设 $f(x)=y_t=\frac{dy}{dx} =">
-<meta property="og:updated_time" content="2017-03-28T16:18:50.851Z">
+下面用3层 1xNx1 神经网络解该问题。">
+<meta property="og:image" content="https://zhangyuygss.github.io/../uploads/fnde.jpg">
+<meta property="og:updated_time" content="2017-03-28T16:28:38.744Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络解常微分方程">
 <meta name="twitter:description" content="神经网络解常微分方程对于常微分方程
 $$\left{\begin{array}{c}\frac{dy}{dx}=x^3-\frac{y}{x}\\y(1)=\frac{2}{5}\end{array}\right.$$其精确解为 $y(x)=\frac{x^4}{5}+\frac{1}{5x}$ .
-下面用3层 1xNx1 神经网络解该问题。
-设 $f(x)=y_t=\frac{dy}{dx} =">
+下面用3层 1xNx1 神经网络解该问题。">
+<meta name="twitter:image" content="https://zhangyuygss.github.io/../uploads/fnde.jpg">
 
 
 
@@ -368,12 +367,13 @@ $$\left{\begin{array}{c}\frac{dy}{dx}=x^3-\frac{y}{x}\\y(1)=\frac{2}{5}\end{arra
         <h4 id="神经网络解常微分方程"><a href="#神经网络解常微分方程" class="headerlink" title="神经网络解常微分方程"></a>神经网络解常微分方程</h4><p>对于常微分方程</p>
 <p>$$<br>\left{<br>\begin{array}{c}<br>\frac{dy}{dx}=x^3-\frac{y}{x}\\<br>y(1)=\frac{2}{5}<br>\end{array}<br>\right.<br>$$<br>其精确解为 $y(x)=\frac{x^4}{5}+\frac{1}{5x}$ .</p>
 <p>下面用3层 <em>1xNx1</em> 神经网络解该问题。</p>
+<a id="more"></a>
 <p>设 $f(x)=y_t=\frac{dy}{dx} = y_0+xN(x,p)$ , 其中 $N(x,p)$ 是三层神经网络的输出， $p$ 是网络中的参数，维度为 $3n$ 。在区间 $[1,2]$ 中取 m 个点做训练数据。求解最优化问题<br>$$<br>min\sum_{i=1}^m{ \frac{dy_t(x,p)}{dx}|_{x=x_i}-f(x_i,y_t(x_i,p)) }^2<br>$$<br>将得到的 $p$ 带入到 $y_t(x,p)$ 中就能得出训练出来的该微分方程的近似解。</p>
 <p>通过计算可以得出上式平方内的项为:<br>$$<br>J(x_i) = \sum_{j=1}^n\frac{2v_j}{1+e^{\theta_j-\omega_jx_i}}+\sum_{j=1}^n\frac{xv_j\omega_je^{\theta_j-\omega_jx_i}}{(1+e^{\theta_j-\omega_jx_i})^2}-x_i^3+\frac{0.4}{x_i}<br>$$<br>给出表示上述函数及其导数的代码:</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> = <span class="title">fnde</span><span class="params">(p)</span></span></div><div class="line">	<span class="comment">%% Loss function of neural network method to solve differential equation</span></div><div class="line">	<span class="comment">% a 1-n-1 3 layer neural network</span></div><div class="line">	<span class="comment">% p is 3n dimensional parameter column vector</span></div><div class="line">	m = <span class="number">10</span>;					<span class="comment">% points selected in interval [1,2]</span></div><div class="line">	xs = [<span class="number">1</span>:<span class="number">1</span>/(m<span class="number">-1</span>):<span class="number">2</span>]';</div><div class="line">	f = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> iter = <span class="number">1</span>:<span class="built_in">length</span>(xs)</div><div class="line">		ftmp = finner(xs(iter), p);</div><div class="line">		f = f + ftmp^<span class="number">2</span>;</div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fx</span> = <span class="title">finner</span><span class="params">(x, p)</span></span></div><div class="line">	<span class="comment">% x 1 dimensional number</span></div><div class="line">	<span class="comment">% p is 3n dimensional parameter column vector</span></div><div class="line">	<span class="comment">% f is 1 dim number</span></div><div class="line">	n = <span class="built_in">length</span>(p)/<span class="number">3</span>;</div><div class="line">	v = p(<span class="number">1</span>:n);</div><div class="line">	theta = p(n+<span class="number">1</span>: <span class="number">2</span>*n);</div><div class="line">	omega = p(<span class="number">2</span>*n+<span class="number">1</span> : <span class="keyword">end</span>);</div><div class="line"></div><div class="line">	z = x*omega - theta;</div><div class="line">	fx = <span class="number">2</span>*v'*sigmoid(z) + x*(v.*omega)'*(<span class="built_in">exp</span>(-z).*(sigmoid(z).^<span class="number">2</span>)) - x^<span class="number">3</span> + <span class="number">2</span>/<span class="number">5</span>/x;</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">%% gnde: Gradient of loss function of neural network method to solve differential equation</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">grad</span> = <span class="title">gnde</span><span class="params">(p)</span></span></div><div class="line">	m = <span class="number">10</span>;					<span class="comment">% points selected in interval [1,2]</span></div><div class="line">	xs = [<span class="number">1</span>:<span class="number">1</span>/(m<span class="number">-1</span>):<span class="number">2</span>]';</div><div class="line">	grad = <span class="built_in">zeros</span>(<span class="built_in">length</span>(p), <span class="number">1</span>);</div><div class="line">	<span class="keyword">for</span> iter = <span class="number">1</span>:<span class="built_in">length</span>(xs)</div><div class="line">		gradtmp = ginner(xs(iter), p);</div><div class="line">		grad = grad + gradtmp;</div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="params">[gx]</span> = <span class="title">ginner</span><span class="params">(x, p)</span></span></div><div class="line">	n = <span class="built_in">length</span>(p)/<span class="number">3</span>;</div><div class="line">	v = p(<span class="number">1</span>:n);</div><div class="line">	theta = p(n+<span class="number">1</span>: <span class="number">2</span>*n);</div><div class="line">	omega = p(<span class="number">2</span>*n+<span class="number">1</span> : <span class="keyword">end</span>);	</div><div class="line"></div><div class="line">	fx = finner(x, p);				<span class="comment">% 1 dim	</span></div><div class="line"></div><div class="line">	z       = x*omega - theta;</div><div class="line">	d_v     = <span class="number">2</span>*sigmoid(z) + x*omega.*<span class="built_in">exp</span>(-z).*(sigmoid(z).^<span class="number">2</span>);</div><div class="line">	d_theta = (x*v.*omega - <span class="number">2</span>*v).*<span class="built_in">exp</span>(-z).*(sigmoid(z).^<span class="number">2</span>) - ...</div><div class="line">			  <span class="number">2</span>*x*v.*omega.*<span class="built_in">exp</span>(<span class="number">-2</span>*z).*(sigmoid(z).^<span class="number">3</span>);</div><div class="line">	d_omega = (<span class="number">3</span>*x*v - x^<span class="number">2</span>*v.*omega).*<span class="built_in">exp</span>(-z).*(sigmoid(z).^<span class="number">2</span>) + ...</div><div class="line">			  <span class="number">2</span>*x^<span class="number">2</span>*v.*omega.*<span class="built_in">exp</span>(<span class="number">-2</span>*z).*(sigmoid(z).^<span class="number">3</span>);</div><div class="line"></div><div class="line">	gx = [d_v; d_theta; d_omega];</div><div class="line">	gx = <span class="number">2</span>*fx*gx;</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fx</span> = <span class="title">finner</span><span class="params">(x, p)</span></span></div><div class="line">	<span class="comment">% x 1 dimensional number</span></div><div class="line">	<span class="comment">% p is 3n dimensional parameter column vector</span></div><div class="line">	<span class="comment">% f is 1 dim number</span></div><div class="line">	n = <span class="built_in">length</span>(p)/<span class="number">3</span>;</div><div class="line">	v = p(<span class="number">1</span>:n);</div><div class="line">	theta = p(n+<span class="number">1</span>: <span class="number">2</span>*n);</div><div class="line">	omega = p(<span class="number">2</span>*n+<span class="number">1</span> : <span class="keyword">end</span>);</div><div class="line"></div><div class="line">	z = x*omega - theta;</div><div class="line">	fx = <span class="number">2</span>*v'*sigmoid(z) + x*(v.*omega)'*(<span class="built_in">exp</span>(-z).*(sigmoid(z).^<span class="number">2</span>)) - x^<span class="number">3</span> + <span class="number">2</span>/<span class="number">5</span>/x;</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
 <p>利用拟牛方法计算参数 $p$ 的值并画图和真实解析解进行比较:</p>
-<p>![][<a href="https://zhangyuygss.github.io/uploads/fnde.jpg">https://zhangyuygss.github.io/uploads/fnde.jpg</a>]</p>
+<p><img src="../uploads/fnde.jpg" alt="fnde"></p>
 
       
     </div>
@@ -413,6 +413,10 @@ $$\left{\begin{array}{c}\frac{dy}{dx}=x^3-\frac{y}{x}\\y(1)=\frac{2}{5}\end{arra
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/05/高光谱图像分类实验/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -488,7 +492,7 @@ $$\left{\begin{array}{c}\frac{dy}{dx}=x^3-\frac{y}{x}\\y(1)=\frac{2}{5}\end{arra
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
