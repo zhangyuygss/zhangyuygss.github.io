@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhangyuygss.github.io/"/>
-  <updated>2017-05-05T09:48:25.702Z</updated>
+  <updated>2017-05-05T09:49:20.631Z</updated>
   <id>https://zhangyuygss.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://zhangyuygss.github.io/2017/05/05/HSI-Classification/"/>
     <id>https://zhangyuygss.github.io/2017/05/05/HSI-Classification/</id>
     <published>2017-05-05T07:40:18.000Z</published>
-    <updated>2017-05-05T09:48:25.702Z</updated>
+    <updated>2017-05-05T09:49:20.631Z</updated>
     
     <content type="html"><![CDATA[<h3 id="高光谱图像分类实验"><a href="#高光谱图像分类实验" class="headerlink" title="高光谱图像分类实验"></a>高光谱图像分类实验</h3><p>参考论文 *[Hyperspectral Image Classification via kernel sparse representstion][1]，实现基于核方法（kernel）和稀疏表示（sparse representation）的高光谱图像分类算法。本文大致介绍论文中的方法和代码实现。文章是5、6年前提出的了，个人不是很了解最近这个方面最新的发展，似乎也有基于深度网络的分类算法出现。但从被引情况看这篇文章应该比较经典，而且从练手的角度看，实现核与稀疏表示这些经典方法相较于再套用一下神经网络也更有意义，因此实现其方法并简单介绍。</p>
 <a id="more"></a>
